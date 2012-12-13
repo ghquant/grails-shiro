@@ -50,7 +50,7 @@ import org.springframework.aop.target.HotSwappableTargetSource
 
 class ShiroGrailsPlugin {
     // the plugin version
-    def version = "1.2.0-SNAPSHOT"
+    def version = "1.2.0.2-INTERNAL"
     // the version or versions of Grails the plugin is designed for
     def grailsVersion = "1.2 > *"
     // the other plugins this plugin depends on
@@ -261,20 +261,6 @@ Enables Grails applications to take advantage of the Apache Shiro security layer
                 // use our custom INI-based filter...
                 if (application.config.security.shiro.filter.config) {
                     log.warn "security.shiro.filter.config option is deprecated. Use Grails' bean property override mechanism instead."
-
-                    'filter-class'('org.apache.shiro.grails.LegacyShiroFilter')
-                    'init-param' {
-                        'param-name'('securityManagerBeanName')
-                        'param-value'('shiroSecurityManager')
-                    }
-
-                    // If a Shiro configuration is available, add it
-                    // as an 'init-param' of the filter. This config should
-                    // be in .ini format.
-                    'init-param' {
-                        'param-name'('config')
-                        'param-value'(application.config.security.shiro.filter.config)
-                    }
                 }
                 else {
                     // ...otherwise use a DelagatingFilterProxy with the 'shiroFilter'
